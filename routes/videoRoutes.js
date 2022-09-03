@@ -14,9 +14,8 @@ app.use("/images", express.static("./public/images"));
 const readVideo = (fileName) => {
     const fileContent = JSON.parse(fs.readFileSync(`./data/${fileName}.json`));
     return fileContent;
-  };
+};
   
-
 router.get("/", function (req, res) {
     const videos = readVideo("videos");
     res.json(videos);
