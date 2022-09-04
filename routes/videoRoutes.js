@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 const router = express.Router();
 app.use(express.json());
+const gen = require("images-generator");
 app.use("/images", express.static("./public/images"));
 
 const readVideo = (fileName) => {
@@ -27,12 +28,13 @@ router.get("/:id", (req, res) => {
     res.send(video);
 });
 
-router.post("/upload", function (req, res) {
+router.post("/upload", async function (req, res) {
     const videos = readVideo("videos");
+    let catImage = await gen.animal.cat();
     const newVideo = {
       title: req.body.title,
       channel: "Shoors",
-      image: `https://source.unsplash.com/random/300x200?sig=${Math.random()}`,
+      image: catImage,
       description: req.body.description,
       views: "7654357",
       likes: "9001",
@@ -43,14 +45,14 @@ router.post("/upload", function (req, res) {
         {
           name: "Shaurrya Sharma",
           comment:
-            "It’s like a weight has been lifted off of my shoulders. Thank you so much for sharing this video. I will be sending this to all of my friends and family ASAP.",
+            "It’s like a weight has been lifted off of my cat's shoulders. Thank you so much for sharing this cat video. I will be sending this to all of my cat's friends and family ASAP.",
           likes: 0,
           timestamp: Date.now(),
         },
         {
           name: "SHOORS",
           comment:
-            "Let’s collaborate on a video for making more videos! I’ll have my associates contact yours.",
+            "Let’s collaborate on a video for filming more cats! I’ll have my cat associates contact your cat.",
           likes: 0,
           timestamp: Date.now(),
         },
